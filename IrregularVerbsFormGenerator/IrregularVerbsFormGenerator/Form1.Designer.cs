@@ -43,11 +43,12 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.CheckVerbsBtnControl = new System.Windows.Forms.Button();
             this.infinitivePicture = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pastPicture = new System.Windows.Forms.PictureBox();
+            this.participlePicture = new System.Windows.Forms.PictureBox();
+            this.resultMeaning = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.infinitivePicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pastPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.participlePicture)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +63,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 68);
+            this.label2.Location = new System.Drawing.Point(9, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 1;
@@ -95,7 +96,7 @@
             // 
             // pastBox
             // 
-            this.pastBox.Location = new System.Drawing.Point(12, 85);
+            this.pastBox.Location = new System.Drawing.Point(12, 88);
             this.pastBox.Name = "pastBox";
             this.pastBox.Size = new System.Drawing.Size(100, 20);
             this.pastBox.TabIndex = 5;
@@ -111,12 +112,12 @@
             // 
             this.meaningBox.Location = new System.Drawing.Point(12, 214);
             this.meaningBox.Name = "meaningBox";
-            this.meaningBox.Size = new System.Drawing.Size(100, 20);
+            this.meaningBox.Size = new System.Drawing.Size(127, 20);
             this.meaningBox.TabIndex = 7;
             // 
             // GetVerbBtnControl
             // 
-            this.GetVerbBtnControl.Location = new System.Drawing.Point(326, 85);
+            this.GetVerbBtnControl.Location = new System.Drawing.Point(326, 88);
             this.GetVerbBtnControl.Name = "GetVerbBtnControl";
             this.GetVerbBtnControl.Size = new System.Drawing.Size(75, 23);
             this.GetVerbBtnControl.TabIndex = 8;
@@ -154,37 +155,46 @@
             // infinitivePicture
             // 
             this.infinitivePicture.Image = ((System.Drawing.Image)(resources.GetObject("infinitivePicture.Image")));
-            this.infinitivePicture.Location = new System.Drawing.Point(118, 19);
+            this.infinitivePicture.Location = new System.Drawing.Point(119, 34);
             this.infinitivePicture.Name = "infinitivePicture";
-            this.infinitivePicture.Size = new System.Drawing.Size(50, 50);
+            this.infinitivePicture.Size = new System.Drawing.Size(20, 20);
             this.infinitivePicture.TabIndex = 11;
             this.infinitivePicture.TabStop = false;
             // 
-            // pictureBox1
+            // pastPicture
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(118, 75);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
+            this.pastPicture.Image = ((System.Drawing.Image)(resources.GetObject("pastPicture.Image")));
+            this.pastPicture.Location = new System.Drawing.Point(119, 88);
+            this.pastPicture.Name = "pastPicture";
+            this.pastPicture.Size = new System.Drawing.Size(20, 20);
+            this.pastPicture.TabIndex = 12;
+            this.pastPicture.TabStop = false;
             // 
-            // pictureBox2
+            // participlePicture
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(118, 131);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
+            this.participlePicture.Image = ((System.Drawing.Image)(resources.GetObject("participlePicture.Image")));
+            this.participlePicture.Location = new System.Drawing.Point(119, 148);
+            this.participlePicture.Name = "participlePicture";
+            this.participlePicture.Size = new System.Drawing.Size(20, 20);
+            this.participlePicture.TabIndex = 13;
+            this.participlePicture.TabStop = false;
+            // 
+            // resultMeaning
+            // 
+            this.resultMeaning.Location = new System.Drawing.Point(12, 241);
+            this.resultMeaning.Name = "resultMeaning";
+            this.resultMeaning.ReadOnly = true;
+            this.resultMeaning.Size = new System.Drawing.Size(127, 20);
+            this.resultMeaning.TabIndex = 14;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(413, 356);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.resultMeaning);
+            this.Controls.Add(this.participlePicture);
+            this.Controls.Add(this.pastPicture);
             this.Controls.Add(this.infinitivePicture);
             this.Controls.Add(this.CheckVerbsBtnControl);
             this.Controls.Add(this.ClearBtnControl);
@@ -201,8 +211,8 @@
             this.Text = "Irregular Verbs Form Generator";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.infinitivePicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pastPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.participlePicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,8 +233,9 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button CheckVerbsBtnControl;
         private System.Windows.Forms.PictureBox infinitivePicture;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pastPicture;
+        private System.Windows.Forms.PictureBox participlePicture;
+        private System.Windows.Forms.TextBox resultMeaning;
     }
 }
 

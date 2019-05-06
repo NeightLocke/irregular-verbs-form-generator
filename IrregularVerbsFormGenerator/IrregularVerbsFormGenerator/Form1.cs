@@ -16,6 +16,9 @@ namespace IrregularVerbsFormGenerator
         private List<Verb> records;
         private static Random rnd = new Random();
         private Verb currentVerb;
+        private Image check = Image.FromFile(@".\Resources\check.png");
+        private Image wrong = Image.FromFile(@".\Resources\wrong.png");
+        private Image question = Image.FromFile(@".\Resources\question-mark.png");
 
         public MainForm()
         {
@@ -29,10 +32,15 @@ namespace IrregularVerbsFormGenerator
 
         private void GetVerbBtnControl_Click(object sender, EventArgs e)
         {
+            infinitivePicture.Image = question;
+            pastPicture.Image = question;
+            participlePicture.Image = question;
+
             infinitiveBox.Clear();
             pastBox.Clear();
             participleBox.Clear();
             meaningBox.Clear();
+            resultMeaning.Clear();
 
             int r = rnd.Next(records.Count);
             currentVerb = records[r];
@@ -66,21 +74,20 @@ namespace IrregularVerbsFormGenerator
             pastBox.Clear();
             participleBox.Clear();
             meaningBox.Clear();
+            resultMeaning.Clear();
             CheckVerbsBtnControl.Enabled = false;
+            infinitivePicture.Image = question;
+            pastPicture.Image = question;
+            participlePicture.Image = question;
         }
 
         private void CheckVerbs_Click(object sender, EventArgs e)
         {
-            if ((infinitiveBox.Text.Equals(currentVerb.Infinitive)) &&
-                (pastBox.Text.Equals(currentVerb.Past)) &&
-                (participleBox.Text.Equals(currentVerb.Participle)))
-            {
-                MessageBox.Show("The answer is correct");
-            }
-            else
-            {
-                MessageBox.Show("The answer is wrong");
-            }
+            infinitivePicture.Image = infinitiveBox.Text.Equals(currentVerb.Infinitive) ? check : wrong;
+            pastPicture.Image = pastBox.Text.Equals(currentVerb.Past) ? check : wrong;
+            participlePicture.Image = participleBox.Text.Equals(currentVerb.Participle) ? check : wrong;
+
+            resultMeaning.Text = currentVerb.Meaning;
         }
     }
 }
