@@ -14,7 +14,7 @@ namespace IrregularVerbsFormGenerator
     /// </summary>
     public class Reader
     {
-        public static List<Verb> Read()
+        public static List<Verb> ReadFields()
         {
             List<Verb> records = new List<Verb>();
 
