@@ -46,6 +46,7 @@
             this.pastPicture = new System.Windows.Forms.PictureBox();
             this.participlePicture = new System.Windows.Forms.PictureBox();
             this.resultMeaning = new System.Windows.Forms.TextBox();
+            this.KeyBtnControl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.infinitivePicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pastPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.participlePicture)).BeginInit();
@@ -187,11 +188,23 @@
             this.resultMeaning.Size = new System.Drawing.Size(127, 20);
             this.resultMeaning.TabIndex = 14;
             // 
+            // KeyBtnControl
+            // 
+            this.KeyBtnControl.Enabled = false;
+            this.KeyBtnControl.Location = new System.Drawing.Point(12, 320);
+            this.KeyBtnControl.Name = "KeyBtnControl";
+            this.KeyBtnControl.Size = new System.Drawing.Size(75, 23);
+            this.KeyBtnControl.TabIndex = 15;
+            this.KeyBtnControl.Text = "Key";
+            this.KeyBtnControl.UseVisualStyleBackColor = true;
+            this.KeyBtnControl.Click += new System.EventHandler(this.KeyBtnControl_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(413, 356);
+            this.Controls.Add(this.KeyBtnControl);
             this.Controls.Add(this.resultMeaning);
             this.Controls.Add(this.participlePicture);
             this.Controls.Add(this.pastPicture);
@@ -207,6 +220,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Irregular Verbs Form Generator";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -236,6 +252,7 @@
         private System.Windows.Forms.PictureBox pastPicture;
         private System.Windows.Forms.PictureBox participlePicture;
         private System.Windows.Forms.TextBox resultMeaning;
+        private System.Windows.Forms.Button KeyBtnControl;
     }
 }
 

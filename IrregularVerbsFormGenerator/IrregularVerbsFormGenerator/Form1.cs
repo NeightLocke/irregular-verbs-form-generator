@@ -66,6 +66,7 @@ namespace IrregularVerbsFormGenerator
             }
 
             CheckVerbsBtnControl.Enabled = true;
+            KeyBtnControl.Enabled = true;
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -76,6 +77,7 @@ namespace IrregularVerbsFormGenerator
             meaningBox.Clear();
             resultMeaning.Clear();
             CheckVerbsBtnControl.Enabled = false;
+            KeyBtnControl.Enabled = false;
             infinitivePicture.Image = question;
             pastPicture.Image = question;
             participlePicture.Image = question;
@@ -88,6 +90,17 @@ namespace IrregularVerbsFormGenerator
             participlePicture.Image = participleBox.Text.Equals(currentVerb.Participle) ? check : wrong;
 
             resultMeaning.Text = currentVerb.Meaning;
+        }
+
+        private void KeyBtnControl_Click(object sender, EventArgs e)
+        {
+            if (currentVerb != null)
+            {
+                infinitiveBox.Text = currentVerb.Infinitive;
+                pastBox.Text = currentVerb.Past;
+                participleBox.Text = currentVerb.Participle;
+                meaningBox.Text = currentVerb.Meaning;
+            }
         }
     }
 }
