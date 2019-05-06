@@ -81,6 +81,7 @@ namespace IrregularVerbsFormGenerator
             infinitivePicture.Image = question;
             pastPicture.Image = question;
             participlePicture.Image = question;
+            currentVerb = null;
         }
 
         private void CheckVerbs_Click(object sender, EventArgs e)
