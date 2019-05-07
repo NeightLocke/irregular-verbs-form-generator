@@ -18,13 +18,36 @@ namespace IrregularVerbsFormGenerator
         {
             List<Verb> records = new List<Verb>();
 
-            using (var reader = new StreamReader(@".\Resources\irregular-verbs.csv"))
-            using (var csv = new CsvReader(reader))
+            try
             {
-                records = csv.GetRecords<Verb>().ToList();
-            }
+                using (var reader = new StreamReader(@".\Resources\irregular-verbs.csv"))
+                using (var csv = new CsvReader(reader))
+                {
+                    records = csv.GetRecords<Verb>().ToList();
+                }
 
-            return records;
+                return records;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void WriteFields(Dictionary<string, Result> results)
+        {
+            try
+            {
+                using (var writer = new StreamWriter(@".\Resources\results.csv"))
+                using (var csv = new CsvWriter(writer))
+                {
+                    csv.WriteRecords(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -16,14 +16,22 @@ namespace IrregularVerbsFormGenerator
         private List<Verb> records;
         private static Random rnd = new Random();
         private Verb currentVerb;
-        private Image check = Image.FromFile(@".\Resources\check.png");
-        private Image wrong = Image.FromFile(@".\Resources\wrong.png");
-        private Image question = Image.FromFile(@".\Resources\question-mark.png");
+        private Image checkImage = Image.FromFile(@".\Resources\check.png");
+        private Image wrongImage = Image.FromFile(@".\Resources\wrong.png");
+        private Image questionImage = Image.FromFile(@".\Resources\question-mark.png");
+        private Dictionary<string, Result> results = new Dictionary<string, Result>();
 
         public MainForm()
         {
             InitializeComponent();
-            records = Reader.ReadFields();
+            try
+            {
+                records = Reader.ReadFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -32,9 +40,9 @@ namespace IrregularVerbsFormGenerator
 
         private void GetVerbBtnControl_Click(object sender, EventArgs e)
         {
-            infinitivePicture.Image = question;
-            pastPicture.Image = question;
-            participlePicture.Image = question;
+            infinitivePicture.Image = questionImage;
+            pastPicture.Image = questionImage;
+            participlePicture.Image = questionImage;
 
             infinitiveBox.Clear();
             pastBox.Clear();
@@ -78,19 +86,50 @@ namespace IrregularVerbsFormGenerator
             resultMeaning.Clear();
             CheckVerbsBtnControl.Enabled = false;
             KeyBtnControl.Enabled = false;
-            infinitivePicture.Image = question;
-            pastPicture.Image = question;
-            participlePicture.Image = question;
+            infinitivePicture.Image = questionImage;
+            pastPicture.Image = questionImage;
+            participlePicture.Image = questionImage;
             currentVerb = null;
+            SummaryBox.Clear();
         }
 
         private void CheckVerbs_Click(object sender, EventArgs e)
         {
-            infinitivePicture.Image = infinitiveBox.Text.Equals(currentVerb.Infinitive) ? check : wrong;
-            pastPicture.Image = pastBox.Text.Equals(currentVerb.Past) ? check : wrong;
-            participlePicture.Image = participleBox.Text.Equals(currentVerb.Participle) ? check : wrong;
+            bool wrongAttempt = false;
+            infinitivePicture.Image = infinitiveBox.Text.Equals(currentVerb.Infinitive) ? checkImage : wrongImage;
+            pastPicture.Image = pastBox.Text.Equals(currentVerb.Past) ? checkImage : wrongImage;
+            participlePicture.Image = participleBox.Text.Equals(currentVerb.Participle) ? checkImage : wrongImage;
 
             resultMeaning.Text = currentVerb.Meaning;
+
+            if (!infinitiveBox.Text.Equals(currentVerb.Infinitive) ||
+                !pastBox.Text.Equals(currentVerb.Past) ||
+                !participleBox.Text.Equals(currentVerb.Participle))
+            {
+                wrongAttempt = true;
+            }
+
+            if (results.ContainsKey(currentVerb.Infinitive))
+            {
+                results[currentVerb.Infinitive].NumAttempts++;
+                if (wrongAttempt)
+                {
+                    results[currentVerb.Infinitive].WrongAttempts++;
+                }
+            }
+            else
+            {
+                Result verbResult = new Result()
+                {
+                    Verb = currentVerb,
+                    NumAttempts = 1,
+                };
+                if (wrongAttempt)
+                {
+                    verbResult.WrongAttempts = 1;
+                }
+                results.Add(currentVerb.Infinitive, verbResult);
+            }
         }
 
         private void KeyBtnControl_Click(object sender, EventArgs e)
@@ -100,7 +139,77 @@ namespace IrregularVerbsFormGenerator
                 infinitiveBox.Text = currentVerb.Infinitive;
                 pastBox.Text = currentVerb.Past;
                 participleBox.Text = currentVerb.Participle;
-                meaningBox.Text = currentVerb.Meaning;
+                resultMeaning.Text = currentVerb.Meaning;
+
+                if (results.ContainsKey(currentVerb.Infinitive))
+                {
+                    results[currentVerb.Infinitive].NumAttempts++;
+                    results[currentVerb.Infinitive].WrongAttempts++;
+                    results[currentVerb.Infinitive].ClueUsed = true;
+                }
+                else
+                {
+                    Result verbResult = new Result()
+                    {
+                        Verb = currentVerb,
+                        NumAttempts = 1,
+                        WrongAttempts = 1,
+                        ClueUsed = true,
+                    };
+                    results.Add(currentVerb.Infinitive, verbResult);
+                }
+            }
+        }
+
+        private void DoneBtnControl_Click(object sender, EventArgs e)
+        {
+            SummaryBox.Clear();
+            foreach (var currentResult in results)
+            {
+                SummaryBox.Text +=
+                    "Verb : " + currentResult.Key + "\r\n" +
+                    "NumAttempts : " + currentResult.Value.NumAttempts + "\r\n" +
+                    "WrongAttempts : " + currentResult.Value.WrongAttempts + "\r\n" +
+                    "ClueUsed : " + currentResult.Value.ClueUsed.ToString().ToUpper() + "\r\n" + "\r\n";
+            }
+
+            if (results.Count > 0)
+            {
+                try
+                {
+                    Reader.WriteFields(results);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void DeleleAllBtnControl_Click(object sender, EventArgs e)
+        {
+            infinitiveBox.Clear();
+            pastBox.Clear();
+            participleBox.Clear();
+            meaningBox.Clear();
+            resultMeaning.Clear();
+            CheckVerbsBtnControl.Enabled = false;
+            KeyBtnControl.Enabled = false;
+            infinitivePicture.Image = questionImage;
+            pastPicture.Image = questionImage;
+            participlePicture.Image = questionImage;
+            currentVerb = null;
+            SummaryBox.Clear();
+            currentVerb = null;
+            results = new Dictionary<string, Result>();
+            // En el DeleteAll tengo que volver a cargar la lista original de verbos
+            try
+            {
+                records = Reader.ReadFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

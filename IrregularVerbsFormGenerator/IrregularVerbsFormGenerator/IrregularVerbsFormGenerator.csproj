@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\Result.cs" />
     <Compile Include="DTOs\Verb.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
