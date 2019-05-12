@@ -20,7 +20,7 @@ namespace IrregularVerbsFormGenerator
 
             try
             {
-                using (var reader = new StreamReader(@".\Resources\irregular-verbs.csv"))
+                using (var reader = new StreamReader(@".\Resources\irregular-verbs-extended.csv"))
                 using (var csv = new CsvReader(reader))
                 {
                     records = csv.GetRecords<Verb>().ToList();
